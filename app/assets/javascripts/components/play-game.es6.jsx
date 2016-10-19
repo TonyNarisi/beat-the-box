@@ -5,23 +5,21 @@ class PlayGame extends React.Component {
       remainingDeck: [],
       box: []
     }
-    this.dealInitialBox = this.dealInitialBox.bind(this);
   }
 
   componentDidMount() {
-    this.dealInitialBox();
-  }
-
-  dealInitialBox() {
-    for (var i = 0; i < 9; i++) {
-      debugger;
-      this.setState({
-        box: this.state.box.concat(this.state.box.push(this.props.deck.pop()))
-      })
-    }
+    // for (var i = 0; i < 9; i++) {
+      // card = this.props.deck[i];
+      // this.setState({
+      //   box: this.state.box.concat([card])
+      // })
+      // debugger;
+    // }
     this.setState({
-      remainingDeck: this.props.deck
+      box: this.props.deck.slice(0, 9),
+      remainingDeck: this.props.deck.slice(9, 53)
     })
+    debugger;
   }
 
   render(){
