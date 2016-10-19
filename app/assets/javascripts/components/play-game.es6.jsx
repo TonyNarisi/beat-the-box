@@ -37,12 +37,18 @@ class PlayGame extends React.Component {
     return (
       <div className="game-board">
         <p>Welcome to the game playing screen!</p>
+        <p>Cards Remaining in Deck: {this.state.remainingDeck.length}</p>
         <p>Invalid Piles: {this.state.invalidCount}</p>
         {this.state.invalidCount === 9 ?
             <div>
               <p>Game Lost!</p>
               <button><a href="/play_game">Retry!</a></button>
             </div>
+          :
+            null
+        }
+        {this.state.remainingDeck.length === 0 ?
+            <h1>Congratulations, you've beat the box!</h1>
           :
             null
         }
