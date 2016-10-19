@@ -5,6 +5,7 @@ class PlayGame extends React.Component {
       remainingDeck: [],
       box: []
     }
+    this.drawNextCard = this.drawNextCard.bind(this);
   }
 
   componentDidMount() {
@@ -14,13 +15,27 @@ class PlayGame extends React.Component {
     })
   }
 
+  drawNextCard(pileNumber) {
+    var box = this.state.box;
+    var nextCard = this.state.remainingDeck.pop();
+    box[pileNumber] = nextCard;
+    this.setState({
+      box: box
+    })
+    return nextCard;
+  }
+
   render(){
     return (
-      <div>
+      <div className="game-board">
         <p>Welcome to the game playing screen!</p>
         {this.state.box.map((card, i) => {
           return (
-            <p key={i}>{card.name} of {card.suit}</p>
+            <CardPile
+             card={card}
+             drawNextCard={this.drawNextCard}
+             pileNumber={i}
+             key={i} />
           )
         })}
       </div>
