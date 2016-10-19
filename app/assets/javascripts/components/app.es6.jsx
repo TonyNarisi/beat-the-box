@@ -5,7 +5,7 @@ class App extends React.Component{
         <h1>Welcome to Beat the Box</h1>
         <h2>Please select an option from below</h2>
         <ul>
-          <li>Start a new game</li>
+          <li><a href="/play_game">Start a new game</a></li>
           <li>Rules</li>
         </ul>
       </div>
