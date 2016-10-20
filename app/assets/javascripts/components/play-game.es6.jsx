@@ -35,33 +35,35 @@ class PlayGame extends React.Component {
 
   render(){
     return (
-      <div className="game-board">
-        <p>Welcome to the game playing screen!</p>
-        <p>Cards Remaining in Deck: {this.state.remainingDeck.length}</p>
-        <p>Invalid Piles: {this.state.invalidCount}</p>
-        {this.state.invalidCount === 9 ?
-            <div>
-              <p>Game Lost!</p>
-              <button><a href="/play_game">Retry!</a></button>
-            </div>
-          :
-            null
-        }
-        {this.state.remainingDeck.length === 0 ?
-            <h1>Congratulations, you've beat the box!</h1>
-          :
-            null
-        }
-        {this.state.box.map((card, i) => {
-          return (
-            <CardPile
-             card={card}
-             drawNextCard={this.drawNextCard}
-             addInvalidPile={this.addInvalidPile}
-             pileNumber={i}
-             key={i} />
-          )
-        })}
+      <div id="game-board-holder">
+        <div className="game-board">
+          <p>Welcome to the game playing screen!</p>
+          <p>Cards Remaining in Deck: {this.state.remainingDeck.length}</p>
+          <p>Invalid Piles: {this.state.invalidCount}</p>
+          {this.state.invalidCount === 9 ?
+              <div>
+                <p>Game Lost!</p>
+                <button><a href="/play_game">Retry!</a></button>
+              </div>
+            :
+              null
+          }
+          {this.state.remainingDeck.length === 0 ?
+              <h1>Congratulations, you've beat the box!</h1>
+            :
+              null
+          }
+          {this.state.box.map((card, i) => {
+            return (
+              <CardPile
+               card={card}
+               drawNextCard={this.drawNextCard}
+               addInvalidPile={this.addInvalidPile}
+               pileNumber={i}
+               key={i} />
+            )
+          })}
+        </div>
       </div>
     )
   }

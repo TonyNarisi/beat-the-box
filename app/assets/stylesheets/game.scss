@@ -11,11 +11,17 @@
   text-align: center;
 }
 
+#game-board-holder {
+  max-width: 1400px;
+  min-width: 800px;
+  text-align: center;
+}
+
 .game-board {
   margin-top: 20px;
   height: 1000px;
   width: 650px;
-  position: absolute;
+  display: inline-block;
 }
 
 .card-image {
