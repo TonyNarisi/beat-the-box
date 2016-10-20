@@ -3,7 +3,10 @@ class CardPile extends React.Component {
     super();
     this.state = {
       size: 1,
-      valid: true
+      valid: true,
+      cardDrawnLost: null,
+      guessLost: null,
+      cardGuessLost: null
     }
     this.chooseHigher = this.chooseHigher.bind(this);
     this.chooseSame = this.chooseSame.bind(this);
@@ -18,7 +21,7 @@ class CardPile extends React.Component {
       console.log("Correct!");
     } else {
       console.log("Wrong!");
-      this.invalidatePile();
+      this.invalidatePile(newCard, "higher", oldCard);
     }
   }
 
@@ -29,7 +32,7 @@ class CardPile extends React.Component {
       console.log("Correct!");
     } else {
       console.log("Wrong!");
-      this.invalidatePile();
+      this.invalidatePile(newCard, "same", oldCard);
     }
   }
 
@@ -40,13 +43,16 @@ class CardPile extends React.Component {
       console.log("Correct!");
     } else {
       console.log("Wrong!");
-      this.invalidatePile();
+      this.invalidatePile(newCard, "lower", oldCard);
     }
   }
 
-  invalidatePile() {
+  invalidatePile(cardDrawnLost, guessLost, cardGuessLost) {
     this.setState({
-      valid: false
+      valid: false,
+      cardDrawnLost: cardDrawnLost,
+      guessLost: guessLost,
+      cardGuessLost: cardGuessLost
     })
     this.props.addInvalidPile();
   }
@@ -63,7 +69,10 @@ class CardPile extends React.Component {
               <button className="lower-button" onClick={this.chooseLower}>Lower</button>
             </div>
           :
-            <p className="card-text">Eliminated Pile</p>
+            <div>
+              <p className="card-text">Eliminated Pile</p>
+              <p className="card-text">The last card drawn was a {this.state.cardDrawnLost.name} of {this.state.cardDrawnLost.suit}. You guessed {this.state.guessLost} on a {this.state.cardGuessLost.name} of {this.state.cardGuessLost.suit}.</p>
+            </div>
         }
       </div>
     )
