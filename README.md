@@ -1,24 +1,7 @@
-# README
+The playing card images used in this game were created by
+Byron Knoll and are available in the public domain. Much gratitude
+is given to Byron for making his images available free of charge.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+See the following sites for more information:
+* http://byronknoll.blogspot.com/2011/03/vector-playing-cards.html
+* https://code.google.com/archive/p/vector-playing-cards/
