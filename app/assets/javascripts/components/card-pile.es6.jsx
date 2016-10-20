@@ -12,6 +12,7 @@ class CardPile extends React.Component {
     this.chooseSame = this.chooseSame.bind(this);
     this.chooseLower = this.chooseLower.bind(this);
     this.invalidatePile = this.invalidatePile.bind(this);
+    this.checkForGameOver = this.checkForGameOver.bind(this);
   }
 
   chooseHigher() {
@@ -19,6 +20,7 @@ class CardPile extends React.Component {
     var newCard = this.props.drawNextCard(this.props.pileNumber);
     if (newCard.value > oldCard.value) {
       console.log("Correct!");
+      this.checkForGameOver();
     } else {
       console.log("Wrong!");
       this.invalidatePile(newCard, "higher", oldCard);
@@ -30,6 +32,7 @@ class CardPile extends React.Component {
     var newCard = this.props.drawNextCard(this.props.pileNumber);
     if (newCard.value === oldCard.value) {
       console.log("Correct!");
+      this.checkForGameOver();
     } else {
       console.log("Wrong!");
       this.invalidatePile(newCard, "same", oldCard);
@@ -41,6 +44,7 @@ class CardPile extends React.Component {
     var newCard = this.props.drawNextCard(this.props.pileNumber);
     if (newCard.value < oldCard.value) {
       console.log("Correct!");
+      this.checkForGameOver();
     } else {
       console.log("Wrong!");
       this.invalidatePile(newCard, "lower", oldCard);
@@ -57,6 +61,13 @@ class CardPile extends React.Component {
     this.props.addInvalidPile();
   }
 
+  checkForGameOver() {
+    debugger;
+    if (this.props.remainingDeck.length < 1) {
+      this.props.endGame();
+    }
+  }
+
   render() {
     let card = this.props.card
     return (
@@ -64,9 +75,15 @@ class CardPile extends React.Component {
         { this.state.valid ?
             <div>
               <img className="card-image" src={card.img_path} alt="card" />
-              <button className="higher-button card-button" onClick={this.chooseHigher}>Higher</button>
-              <button className="same-button card-button" onClick={this.chooseSame}>Same</button>
-              <button className="lower-button card-button" onClick={this.chooseLower}>Lower</button>
+              {this.props.gameOver ?
+                  null
+                :
+                  <div>
+                    <button className="higher-button card-button" onClick={this.chooseHigher}>Higher</button>
+                    <button className="same-button card-button" onClick={this.chooseSame}>Same</button>
+                    <button className="lower-button card-button" onClick={this.chooseLower}>Lower</button>
+                  </div>
+              }
             </div>
           :
             <div>

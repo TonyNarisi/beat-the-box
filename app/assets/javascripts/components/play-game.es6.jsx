@@ -4,10 +4,12 @@ class PlayGame extends React.Component {
     this.state = {
       remainingDeck: [],
       box: [],
-      invalidCount: 0
+      invalidCount: 0,
+      gameOver: false
     }
     this.drawNextCard = this.drawNextCard.bind(this);
     this.addInvalidPile = this.addInvalidPile.bind(this);
+    this.endGame = this.endGame.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +35,12 @@ class PlayGame extends React.Component {
     })
   }
 
+  endGame() {
+    this.setState({
+      gameOver: true
+    })
+  }
+
   render(){
     return (
       <div id="game-board-holder">
@@ -47,7 +55,7 @@ class PlayGame extends React.Component {
             :
               null
           }
-          {this.state.remainingDeck.length === 0 ?
+          {this.state.remainingDeck.length === 0 && this.state.invalidCount < 9 ?
               <div>
                 <h2 className="game-message">Congratulations, you've beat the box!</h2>
                 <a href="/play_game"><button className="retry-button">Retry!</button></a>
@@ -59,8 +67,11 @@ class PlayGame extends React.Component {
             return (
               <CardPile
                card={card}
+               gameOver={this.state.gameOver}
                drawNextCard={this.drawNextCard}
                addInvalidPile={this.addInvalidPile}
+               remainingDeck={this.state.remainingDeck}
+               endGame={this.endGame}
                pileNumber={i}
                key={i} />
             )
