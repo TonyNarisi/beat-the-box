@@ -24,10 +24,6 @@ class PlayGame extends React.Component {
     this.csrfSetter();
   }
 
-  // componentDidUpdate() {
-  //   this.checkForGameOver();
-  // }
-
   csrfSetter() {
     let metaTags = document.getElementsByTagName('meta');
     for (var i = 0; i < metaTags.length; i++) {
@@ -65,6 +61,9 @@ class PlayGame extends React.Component {
   checkForGameOver(invalidCount) {
     console.log("checking for game over")
     console.log(invalidCount)
+    if (this.state.remainingDeck.length > 0) {
+      console.log(this.state.remainingDeck[this.state.remainingDeck.length - 1].value)
+    }
     if (this.state.remainingDeck.length < 1 || invalidCount === 9) {
       this.endGame();
       if (this.state.remainingDeck.length < 1 && this.state.invalidCount < 9) {
@@ -76,8 +75,6 @@ class PlayGame extends React.Component {
   }
 
   recordGameResult(results) {
-    console.log("sending results");
-
     let data = {game_won: results}
 
     fetch('/game_results', {
@@ -126,6 +123,7 @@ class PlayGame extends React.Component {
                remainingDeck={this.state.remainingDeck}
                endGame={this.endGame}
                recordGameResult={this.recordGameResult}
+               checkForGameOver={this.checkForGameOver}
                pileNumber={i}
                key={i} />
             )

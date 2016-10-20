@@ -12,40 +12,36 @@ class CardPile extends React.Component {
     this.chooseSame = this.chooseSame.bind(this);
     this.chooseLower = this.chooseLower.bind(this);
     this.invalidatePile = this.invalidatePile.bind(this);
-    // this.checkForGameOver = this.checkForGameOver.bind(this);
   }
 
   chooseHigher() {
     var oldCard = this.props.card;
     var newCard = this.props.drawNextCard(this.props.pileNumber);
     if (newCard.value > oldCard.value) {
-      console.log("correct");
+      this.props.checkForGameOver(this.props.invalidCount);
     } else {
       this.invalidatePile(newCard, "higher", oldCard);
     }
-    // this.props.checkForGameOver();
   }
 
   chooseSame() {
     var oldCard = this.props.card;
     var newCard = this.props.drawNextCard(this.props.pileNumber);
     if (newCard.value === oldCard.value) {
-      console.log("correct");
+      this.props.checkForGameOver(this.props.invalidCount);
     } else {
       this.invalidatePile(newCard, "same", oldCard);
     }
-    // this.props.checkForGameOver();
   }
 
   chooseLower() {
     var oldCard = this.props.card;
     var newCard = this.props.drawNextCard(this.props.pileNumber);
     if (newCard.value < oldCard.value) {
-      console.log("correct");
+      this.props.checkForGameOver(this.props.invalidCount);
     } else {
       this.invalidatePile(newCard, "lower", oldCard);
     }
-    // this.props.checkForGameOver();
   }
 
   invalidatePile(cardDrawnLost, guessLost, cardGuessLost) {
