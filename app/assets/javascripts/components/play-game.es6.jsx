@@ -74,6 +74,9 @@ class PlayGame extends React.Component {
   }
 
   checkForGameOver(invalidCount) {
+    if (this.state.remainingDeck.length > 1) {
+      console.log(this.state.remainingDeck[this.state.remainingDeck.length - 1].value)
+    }
     if (this.state.remainingDeck.length < 1 || invalidCount === 9) {
       this.endGame();
       if (this.state.remainingDeck.length < 1 && this.state.invalidCount < 9) {
