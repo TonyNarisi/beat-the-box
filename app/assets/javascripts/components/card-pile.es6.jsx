@@ -19,10 +19,8 @@ class CardPile extends React.Component {
     var oldCard = this.props.card;
     var newCard = this.props.drawNextCard(this.props.pileNumber);
     if (newCard.value > oldCard.value) {
-      console.log("Correct!");
       this.checkForGameOver();
     } else {
-      console.log("Wrong!");
       this.invalidatePile(newCard, "higher", oldCard);
     }
   }
@@ -31,10 +29,8 @@ class CardPile extends React.Component {
     var oldCard = this.props.card;
     var newCard = this.props.drawNextCard(this.props.pileNumber);
     if (newCard.value === oldCard.value) {
-      console.log("Correct!");
       this.checkForGameOver();
     } else {
-      console.log("Wrong!");
       this.invalidatePile(newCard, "same", oldCard);
     }
   }
@@ -43,10 +39,8 @@ class CardPile extends React.Component {
     var oldCard = this.props.card;
     var newCard = this.props.drawNextCard(this.props.pileNumber);
     if (newCard.value < oldCard.value) {
-      console.log("Correct!");
       this.checkForGameOver();
     } else {
-      console.log("Wrong!");
       this.invalidatePile(newCard, "lower", oldCard);
     }
   }
@@ -62,7 +56,6 @@ class CardPile extends React.Component {
   }
 
   checkForGameOver() {
-    debugger;
     if (this.props.remainingDeck.length < 1) {
       this.props.endGame();
     }
