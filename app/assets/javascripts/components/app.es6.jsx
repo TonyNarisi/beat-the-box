@@ -8,7 +8,7 @@ class App extends React.Component{
           <li><a href="/play_game">Start a new game</a></li>
           <li>Rules</li>
         </ul>
-        <p>Games Played: {this.props.gameCount}</p>
+        <p>Games Played: {this.props.totalGames}</p>
         <p>Percentage of Games Won: {this.props.gamesWon/this.props.totalGames * 100}%</p>
         <p>Percentage of Games Lost: {this.props.gamesLost/this.props.totalGames * 100}%</p>
       </div>
