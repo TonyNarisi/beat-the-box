@@ -1,5 +1,5 @@
 class Deck < ApplicationRecord
-  has_many :cards
+  has_many :cards, dependent: :destroy
 
   after_create :generate_cards
 

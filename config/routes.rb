@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get '/play_game', to: 'game#play'
 
   resources :game_results, only: :create
+
+  resources :deck, only: :destroy
 end

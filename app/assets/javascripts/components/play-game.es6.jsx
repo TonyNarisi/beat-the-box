@@ -13,6 +13,7 @@ class PlayGame extends React.Component {
     this.endGame = this.endGame.bind(this);
     this.recordGameResult = this.recordGameResult.bind(this);
     this.checkForGameOver = this.checkForGameOver.bind(this);
+    this.deleteDeck = this.deleteDeck.bind(this);
     this.csrfSetter = this.csrfSetter.bind(this);
   }
 
@@ -56,6 +57,20 @@ class PlayGame extends React.Component {
     this.setState({
       gameOver: true
     });
+    this.deleteDeck();
+  }
+
+  deleteDeck() {
+    fetch(`/deck/${this.props.deckId}`, {
+      method: "delete",
+      dataType: "JSON",
+      headers: {
+        "X-CSRF-Token": this.state.csrf,
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      credentials: "include"
+    })
   }
 
   checkForGameOver(invalidCount) {
