@@ -8,6 +8,7 @@ class App extends React.Component{
           <li><a href="/play_game">Start a new game</a></li>
           <li>Rules</li>
         </ul>
+        <p>Games Played: {this.props.gameCount}</p>
       </div>
     )
   }

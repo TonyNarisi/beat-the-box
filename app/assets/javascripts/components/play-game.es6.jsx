@@ -35,33 +35,37 @@ class PlayGame extends React.Component {
 
   render(){
     return (
-      <div className="game-board">
-        <p>Welcome to the game playing screen!</p>
-        <p>Cards Remaining in Deck: {this.state.remainingDeck.length}</p>
-        <p>Invalid Piles: {this.state.invalidCount}</p>
-        {this.state.invalidCount === 9 ?
-            <div>
-              <p>Game Lost!</p>
-              <button><a href="/play_game">Retry!</a></button>
-            </div>
-          :
-            null
-        }
-        {this.state.remainingDeck.length === 0 ?
-            <h1>Congratulations, you've beat the box!</h1>
-          :
-            null
-        }
-        {this.state.box.map((card, i) => {
-          return (
-            <CardPile
-             card={card}
-             drawNextCard={this.drawNextCard}
-             addInvalidPile={this.addInvalidPile}
-             pileNumber={i}
-             key={i} />
-          )
-        })}
+      <div id="game-board-holder">
+        <div className="game-board">
+          <h2 id="cards-remaining">Cards Remaining in Deck: <span className="number-statistic">{this.state.remainingDeck.length}</span></h2>
+          <h2 id="invalid-piles">Eliminated Piles: <span className="number-statistic">{this.state.invalidCount}</span></h2>
+          {this.state.invalidCount === 9 ?
+              <div>
+                <h2 className="game-message">Game Lost!</h2>
+                <a href="/play_game"><button className="retry-button">Retry!</button></a>
+              </div>
+            :
+              null
+          }
+          {this.state.remainingDeck.length === 0 ?
+              <div>
+                <h2 className="game-message">Congratulations, you've beat the box!</h2>
+                <a href="/play_game"><button className="retry-button">Retry!</button></a>
+              </div>
+            :
+              null
+          }
+          {this.state.box.map((card, i) => {
+            return (
+              <CardPile
+               card={card}
+               drawNextCard={this.drawNextCard}
+               addInvalidPile={this.addInvalidPile}
+               pileNumber={i}
+               key={i} />
+            )
+          })}
+        </div>
       </div>
     )
   }

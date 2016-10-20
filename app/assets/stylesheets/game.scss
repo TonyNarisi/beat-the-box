@@ -11,11 +11,17 @@
   text-align: center;
 }
 
+#game-board-holder {
+  max-width: 1400px;
+  min-width: 800px;
+  text-align: center;
+}
+
 .game-board {
   margin-top: 20px;
   height: 1000px;
   width: 650px;
-  position: absolute;
+  display: inline-block;
 }
 
 .card-image {
@@ -29,4 +35,37 @@
 .card-button {
   z-index: 1;
   position: relative;
+}
+
+#cards-remaining {
+  display: inline-block;
+  float: left;
+}
+
+#invalid-piles {
+  display: inline-block;
+  float: right;
+}
+
+.number-statistic {
+  font-size: 1.75em;
+}
+
+.game-message {
+  clear: both;
+  font-size: 2em;
+}
+
+.retry-button {
+  font-size: 1em;
+  padding: 5px 20px;
+  border-radius: 10%;
+  box-shadow: 0px 0px 10px #000000;
+  background-color: #80bfff;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.retry-button:hover {
+  cursor: pointer;
 }
