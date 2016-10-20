@@ -1,5 +1,6 @@
 class GameController < ApplicationController
   def index
+    @game_count = Deck.all.length
   end
 
   def play
