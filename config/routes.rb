@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root to: 'game#index'
   
   get '/play_game', to: 'game#play'
+
+  resources :game_results, only: :create
 end
