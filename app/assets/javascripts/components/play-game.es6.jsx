@@ -5,18 +5,34 @@ class PlayGame extends React.Component {
       remainingDeck: [],
       box: [],
       invalidCount: 0,
-      gameOver: false
+      gameOver: false,
+      csrf: ""
     }
     this.drawNextCard = this.drawNextCard.bind(this);
     this.addInvalidPile = this.addInvalidPile.bind(this);
     this.endGame = this.endGame.bind(this);
+    this.recordGameResult = this.recordGameResult.bind(this);
+    this.checkForGameOver = this.checkForGameOver.bind(this);
+    this.csrfSetter = this.csrfSetter.bind(this);
   }
 
   componentDidMount() {
     this.setState({
       box: this.props.deck.slice(0, 9),
       remainingDeck: this.props.deck.slice(9, 53)
-    })
+    });
+    this.csrfSetter();
+  }
+
+  csrfSetter() {
+    let metaTags = document.getElementsByTagName('meta');
+    for (var i = 0; i < metaTags.length; i++) {
+      if (metaTags[i].name === 'csrf-token') {
+        this.setState({
+          csrf: metaTags[i].content
+        });
+      }
+    }
   }
 
   drawNextCard(pileNumber) {
@@ -25,19 +41,47 @@ class PlayGame extends React.Component {
     box[pileNumber] = nextCard;
     this.setState({
       box: box
-    })
+    });
     return nextCard;
   }
 
   addInvalidPile() {
+    this.checkForGameOver(this.state.invalidCount + 1);
     this.setState({
       invalidCount: this.state.invalidCount + 1
-    })
+    });
   }
 
   endGame() {
     this.setState({
       gameOver: true
+    });
+  }
+
+  checkForGameOver(invalidCount) {
+    if (this.state.remainingDeck.length < 1 || invalidCount === 9) {
+      this.endGame();
+      if (this.state.remainingDeck.length < 1 && this.state.invalidCount < 9) {
+        this.recordGameResult(true);
+      } else {
+        this.recordGameResult(false);
+      }
+    }
+  }
+
+  recordGameResult(results) {
+    let data = {game_won: results}
+
+    fetch('/game_results', {
+      method: 'post',
+      dataType: 'JSON',
+      headers: {
+        "X-CSRF-Token": this.state.csrf,
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify(data)
     })
   }
 
@@ -68,10 +112,13 @@ class PlayGame extends React.Component {
               <CardPile
                card={card}
                gameOver={this.state.gameOver}
+               invalidCount={this.state.invalidCount}
                drawNextCard={this.drawNextCard}
                addInvalidPile={this.addInvalidPile}
                remainingDeck={this.state.remainingDeck}
                endGame={this.endGame}
+               recordGameResult={this.recordGameResult}
+               checkForGameOver={this.checkForGameOver}
                pileNumber={i}
                key={i} />
             )
