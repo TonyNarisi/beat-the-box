@@ -104,13 +104,13 @@ class PlayGame extends React.Component {
     return (
       <div id="game-board-holder">
         <div className="game-board">
-          <a href="/"><button className="home-button">Home</button></a>
+          <a href="/" className="home-button">Home</a>
           <h2 id="cards-remaining">Cards Remaining in Deck: <span className="number-statistic">{this.state.remainingDeck.length}</span></h2>
           <h2 id="invalid-piles">Eliminated Piles: <span className="number-statistic">{this.state.invalidCount}</span></h2>
           {this.state.invalidCount === 9 ?
               <div>
                 <h2 className="game-message">Game Lost!</h2>
-                <a href="/play_game"><button className="retry-button">Retry!</button></a>
+                <a href="/play_game" className="button">Retry!</a>
               </div>
             :
               null
@@ -118,7 +118,7 @@ class PlayGame extends React.Component {
           {this.state.remainingDeck.length === 0 && this.state.invalidCount < 9 ?
               <div>
                 <h2 className="game-message">Congratulations, you've beat the box!</h2>
-                <a href="/play_game"><button className="retry-button">Retry!</button></a>
+                <a href="/play_game" className="button">Retry!</a>
               </div>
             :
               null
