@@ -104,6 +104,7 @@ class PlayGame extends React.Component {
     return (
       <div id="game-board-holder">
         <div className="game-board">
+          <a href="/"><button className="home-button">Home</button></a>
           <h2 id="cards-remaining">Cards Remaining in Deck: <span className="number-statistic">{this.state.remainingDeck.length}</span></h2>
           <h2 id="invalid-piles">Eliminated Piles: <span className="number-statistic">{this.state.invalidCount}</span></h2>
           {this.state.invalidCount === 9 ?
