@@ -60,7 +60,9 @@ class CardPile extends React.Component {
       <div className="card">
         { this.state.valid ?
             <div>
-              <img className="card-image" src={card.img_path} alt="card" />
+              <div className="card-holder">
+                <img className="card-image" src={card.img_path} alt="card" />
+              </div>
               {this.props.gameOver ?
                   null
                 :
