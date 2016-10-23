@@ -66,10 +66,10 @@ class CardPile extends React.Component {
               {this.props.gameOver ?
                   null
                 :
-                  <div>
-                    <button className="higher-button card-button" onClick={this.chooseHigher}>Higher</button>
-                    <button className="same-button card-button" onClick={this.chooseSame}>Same</button>
-                    <button className="lower-button card-button" onClick={this.chooseLower}>Lower</button>
+                  <div className="card-button-holder">
+                    <span className="higher-button card-button" onClick={this.chooseHigher}>Higher</span>
+                    <span className="same-button card-button" onClick={this.chooseSame}>Same</span>
+                    <span className="lower-button card-button" onClick={this.chooseLower}>Lower</span>
                   </div>
               }
             </div>
