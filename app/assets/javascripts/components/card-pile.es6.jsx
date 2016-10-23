@@ -60,14 +60,16 @@ class CardPile extends React.Component {
       <div className="card">
         { this.state.valid ?
             <div>
-              <img className="card-image" src={card.img_path} alt="card" />
+              <div className="card-holder">
+                <img className="card-image" src={card.img_path} alt="card" />
+              </div>
               {this.props.gameOver ?
                   null
                 :
-                  <div>
-                    <button className="higher-button card-button" onClick={this.chooseHigher}>Higher</button>
-                    <button className="same-button card-button" onClick={this.chooseSame}>Same</button>
-                    <button className="lower-button card-button" onClick={this.chooseLower}>Lower</button>
+                  <div className="card-button-holder">
+                    <span className="higher-button card-button" onClick={this.chooseHigher}>Higher</span>
+                    <span className="same-button card-button" onClick={this.chooseSame}>Same</span>
+                    <span className="lower-button card-button" onClick={this.chooseLower}>Lower</span>
                   </div>
               }
             </div>
